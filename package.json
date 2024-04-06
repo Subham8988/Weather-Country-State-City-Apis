@@ -1,0 +1,36 @@
+{
+  "name": "weather-country-state-city-apis",
+  "version": "1.0.0",
+  "description": "City Country state api weather reports",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm sync",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Subham8988/Weather-Country-State-City-Apis.git"
+  },
+  "keywords": [
+    "country",
+    "state",
+    "weather",
+    "apis",
+    "express",
+    "node"
+  ],
+  "author": "Subham Mishra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Subham8988/Weather-Country-State-City-Apis/issues"
+  },
+  "homepage": "https://github.com/Subham8988/Weather-Country-State-City-Apis#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
