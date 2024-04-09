@@ -30,10 +30,11 @@ const countriesList = async (req, res) => {
         await client.close();
 
         if (result.length > 0) {
+            const formattedResult = result.map(({ _id, ...rest }) => rest);
             res.status(200).json({
                 status: 200,
                 length: result.length,
-                data: result,
+                data: formattedResult,
             });
         } else {
             res.status(404).send({ msg: 'Countries not found' });
@@ -54,10 +55,11 @@ const stateList = async (req, res) => {
         const result = await cursor.toArray();
         await client.close();
         if (result.length > 0) {
+            const formattedResult = result.map(({ _id, ...rest }) => rest);
             res.status(200).json({
                 status: 200,
                 length: result.length,
-                data: result,
+                data: formattedResult,
             });
         } else {
             res.status(404).send({ msg: 'States not found' });
@@ -67,41 +69,45 @@ const stateList = async (req, res) => {
     }
 };
 
+
 const cityList = async (req, res) => {
     try {
         const client = await connectToDatabase();
         const dbo = client.db("CountriesStatesCity");
         const collection = dbo.collection("Cityies");
-
         const filter = req.query || {};
-        const count = await collection.countDocuments(filter);
-
-        const page = parseInt(req.query.page) || 1; 
-        const limit = parseInt(req.query.limit) || 10; 
-        const totalPages = Math.ceil(count / limit);
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
-
-        const cursor = collection.find(filter);
-        // const result = await cursor.skip(skip).limit(limit).toArray();
-        const result = await cursor.toArray();
-
+        // const count = await collection.countDocuments(filter);
+        // const query = collection.find(filter).skip(skip).limit(limit);
+        const query = collection.find(filter);
+        
+        const result = await query.toArray();
         await client.close();
 
         if (result.length > 0) {
+            const formattedResult = result.map(({ _id, ...rest }) => rest);
+
+            // Send successful response with paginated data
             res.status(200).json({
                 status: 200,
-                length: result.length,
-                data: result,
-                page: page,
-                totalPages: totalPages,
+                length: formattedResult.length,
+                data: formattedResult,
+                // page: page,
+                // totalPages: Math.ceil(count / limit),
             });
         } else {
             res.status(404).send({ msg: 'Cities not found' });
         }
     } catch (error) {
-        errorHandling(res, req.originalUrl, 500, error.message);
+        res.status(500).send({ msg: 'Internal server error' });
     }
 };
+
+
+
+
 
 
 module.exports = { countriesList, stateList, cityList };

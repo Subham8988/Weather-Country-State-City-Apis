@@ -1,3 +1,4 @@
 Date = 2024-04-06T16:46:26.628Z, EndPoint = /api/v1/getAllCountryList, ErrorMsg = Query filter must be a plain object or ObjectId
 Date = 2024-04-06T16:46:47.149Z, EndPoint = /api/v1/getAllCountryList, ErrorMsg = Query filter must be a plain object or ObjectId
 Date = 2024-04-06T16:47:14.588Z, EndPoint = /api/v1/getAllCountryList, ErrorMsg = cursor is not defined
+Date = 2024-04-09T11:56:04.562Z, EndPoint = /api/v1/getCity?page=3&limit=5, ErrorMsg = collection.skip is not a function

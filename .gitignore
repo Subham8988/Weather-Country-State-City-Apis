@@ -1,3 +1,5 @@
 node_modules
 .env
 /env
+.error_log.txt
+/error_log.txt
